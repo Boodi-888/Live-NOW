@@ -87,4 +87,30 @@
 
         // Handle form submission
         document.getElementById('studentForm').addEventListener('submit', function(event) {
-  
+            event.preventDefault();
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
+                id: document.getElementById('id').value,
+                email: document.getElementById('email').value,
+                schoolYear: document.getElementById('schoolYear').value
+            };
+
+            // Send data to Firebase
+            const studentsRef = ref(database, 'students');
+            push(studentsRef, formData)
+                .then(() => {
+                    alert('Data saved successfully!');
+                    // Optionally, reset the form after submission
+                    document.getElementById('studentForm').reset();
+                })
+                .catch((error) => {
+                    alert('Error saving data: ' + error.message);
+                });
+        });
+    </script>
+
+</body>
+</html>
