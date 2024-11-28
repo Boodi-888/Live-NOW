@@ -69,7 +69,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
-        // Your Firebase config from Firebase Console
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDmtD7RpApsI-6TDY7wn0cOQyKVkA3O0jY",
             authDomain: "live-now-48f7d.firebaseapp.com",
@@ -87,28 +87,4 @@
 
         // Handle form submission
         document.getElementById('studentForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                age: document.getElementById('age').value,
-                id: document.getElementById('id').value,
-                email: document.getElementById('email').value,
-                schoolYear: document.getElementById('schoolYear').value
-            };
-
-            // Send data to Firebase
-            const studentsRef = ref(database, 'students');
-            push(studentsRef, formData)
-                .then(() => {
-                    alert('Data saved successfully!');
-                })
-                .catch((error) => {
-                    alert('Error saving data: ' + error.message);
-                });
-        });
-    </script>
-
-</body>
-</html>
+  
