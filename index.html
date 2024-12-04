@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
+    
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Include Firebase SDK scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDvuyyJgxMq3o-K9INQjj1GSrTInC6argQ",
+      authDomain: "project888-9c8bf.firebaseapp.com",
+      databaseURL: "https://project888-9c8bf-default-rtdb.firebaseio.com",
+      projectId: "project888-9c8bf",
+      storageBucket: "project888-9c8bf.firebasestorage.app",
+      messagingSenderId: "1028003437122",
+      appId: "1:1028003437122:web:c78a63b44a9c3e5c89abdb",
+      measurementId: "G-G1HQFRWJ9K"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database(app);
+
+    // Handle form submission
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Save data to Firebase Realtime Database
+      const userRef = firebase.database().ref('users/' + username);
+      userRef.set({
+        username: username,
+        password: password
+      })
+      .then(() => {
+        alert("Login data has been saved to Firebase.");
+      })
+      .catch((error) => {
+        alert("Error: " + error.message);
+      });
+    });
+  </script>
+</body>
+</html>
